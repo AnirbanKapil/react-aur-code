@@ -19,8 +19,9 @@ function decrement () {
   return (
     
       <div> 
-       <h1>{counter}</h1>
-       <button onClick={increment}>Increase</button>
+        <h1>Hello</h1>
+       <h1 className="bg-slate-900">{counter}</h1>
+       <button className="bg-gray-800" onClick={increment}>Increase</button>
        <button onClick={decrement}>Decrease</button>
       </div>
   )
