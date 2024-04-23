@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-     <h1 className="text-3xl font-bold underline">Hello From TailWind</h1>
+     <h1 className=" bg-green-400 m-4 p-4">Hello From TailWind</h1>
     </>
   )
 }
