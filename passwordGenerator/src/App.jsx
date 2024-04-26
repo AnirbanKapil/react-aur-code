@@ -1,4 +1,4 @@
-import { useState,useCallback } from "react"
+import { useState,useCallback,useEffect } from "react"
 
 
 function App() {
@@ -15,23 +15,27 @@ function App() {
     if(numAllowed) str += "0123456789";
     if(charAllowed) str += "!@#$%^&*~";
       
-    for(let i = 1 ; i <= array.length ; i++){
+    for(let i = 1 ; i <= length ; i++){
       let char = Math.floor(Math.random()*str.length + 1)
-      pass = str.charAt(char);
+      pass += str.charAt(char);
     }
     setPassword(pass);
         
   },[length,numAllowed,charAllowed,setPassword]);
 
+  useEffect(()=>{
+     passwordGenerator() 
+  },[length,numAllowed,charAllowed,passwordGenerator])
+
   return (
     
-      <div className="w-full max-w-screen-md h-[195px] shadow-md mt-20 mx-auto px-4 bg-gray-800 rounded-xl text-white">
+      <div className="w-full max-w-screen-md h-[195px] shadow-md mt-20 mx-auto px-4 bg-gray-800 rounded-xl text-yellow-400">
         <h1 className="text-white my-3 text-center font-extralight">PassWord Generator</h1> 
         <div className="flex shadow-lg mt-10 rounded-lg overflow-hidden mb-9">
           <input
            type="text"
            value={password}
-           className="outline-none w-full py-1 px-3"
+           className="outline-none w-full py-1 px-3 bg-slate-400"
            placeholder="password"
            readOnly
           />
