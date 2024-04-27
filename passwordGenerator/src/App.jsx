@@ -1,4 +1,4 @@
-import { useState,useCallback,useEffect } from "react"
+import { useState,useCallback,useEffect,useRef } from "react"
 
 
 function App() {
@@ -7,6 +7,9 @@ function App() {
   const [numAllowed,setNumAllowed] = useState(false);
   const [charAllowed,setCharAllowed] = useState(false);
   const [password,setPassword] = useState("");
+
+
+  const passwordRef = useRef(null);
   
   const passwordGenerator = useCallback(()=>{
     let pass = "";
@@ -27,6 +30,12 @@ function App() {
      passwordGenerator() 
   },[length,numAllowed,charAllowed,passwordGenerator])
 
+  const copyPasswordToClipBoard = useCallback(()=>{
+    passwordRef.current?.select();
+    passwordRef.current?.setSelectionRange(0,100);
+    window.navigator.clipboard.writeText(password)
+  },[password])
+
   return (
     
       <div className="w-full max-w-screen-md h-[195px] shadow-md mt-20 mx-auto px-4 bg-gray-800 rounded-xl text-yellow-400">
@@ -38,8 +47,11 @@ function App() {
            className="outline-none w-full py-1 px-3 bg-slate-400"
            placeholder="password"
            readOnly
+           ref={passwordRef}
           />
-          <button className="m-4 px-3 rounded-md  bg-blue-500">COPY</button>
+          <button
+           onClick={copyPasswordToClipBoard}
+           className="m-4 px-3 rounded-md  bg-blue-500 hover:bg-blue-600">COPY</button>
         </div>
         <div className="flex text-sm gap-x-4">
           <div className="flex items-center gap-x-1">
