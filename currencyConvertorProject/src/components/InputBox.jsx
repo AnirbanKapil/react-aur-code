@@ -20,8 +20,6 @@ function InputBox({
 ) {
    
     const amountInputId = useId();
-    
-    const [display,setDisplay] = useState()
 
     return (
         <div className={`bg-white p-3 rounded-lg text-sm flex `}>
