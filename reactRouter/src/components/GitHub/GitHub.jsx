@@ -1,17 +1,20 @@
-import { useEffect,useState } from "react"
+// import { useEffect,useState } from "react"
+import { useLoaderData } from "react-router-dom";
 
 function GitHub() {
   
-  const [data,setData] = useState([]);  
+  // const [data,setData] = useState([]);  
    
-  useEffect(()=>{
-    fetch("https://api.github.com/users/hiteshchoudhary").
-    then((res)=> {return res.json()}).
-    then((data)=>{
-         console.log(data);
-         setData(data)
-    })
-  },[]);
+  // useEffect(()=>{
+  //   fetch("https://api.github.com/users/hiteshchoudhary").
+  //   then((res)=> {return res.json()}).
+  //   then((data)=>{
+  //        console.log(data);
+  //        setData(data)
+  //   })
+  // },[]);
+
+const data = useLoaderData();
 
 
   return (
@@ -23,4 +26,11 @@ function GitHub() {
   )
 }
 
-export default GitHub
+export default GitHub;
+
+
+export const gitHubInfoLoader = async () => {
+     const response = await fetch("https://api.github.com/users/hiteshchoudhary");
+     
+     return response.json();     
+}
