@@ -1,10 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ToDoProvider } from "./contexts";
 
 
 function App() {
 
-  const [toDo,setToDo] = useState([]);
+  const [todos,setToDo] = useState([]);
 
   const addToDo = (todo) => {
     setToDo((preV)=> [{id: Date.now(),...todo},...preV])
@@ -21,6 +21,18 @@ function App() {
   const toggleComplete = (id) => {
       setToDo((preV)=> preV.map((todo)=> todo.id == id ? {...todo,completed : !todo.completed} : todo))
   }
+  
+  useEffect(()=>{
+    const todos = JSON.parse(localStorage.getItem("todos"))
+    if(todos && todos.length > 0) {
+      setToDo(todos)
+    } 
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem("todos",JSON.stringify(todos))
+  },[todos]);
+  
 
   return (
     <ToDoProvider value={{todos,addToDo,updateToDo,deleteToDo,toggleComplete}}>
