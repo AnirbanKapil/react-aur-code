@@ -1,5 +1,5 @@
 import React ,{useState} from 'react'
-import useToDo from '../contexts/ToDoContext';
+import {useToDo} from '../contexts/ToDoContext';
 
 function TodoItem({ todo }) {
  
