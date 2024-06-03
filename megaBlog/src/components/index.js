@@ -15,5 +15,8 @@ import Signup from "./Signup";
 
 import Login from "./Login";
 
+import PostForm from "./post-form/PostForm"
 
-export {Header,Footer,Container,Logo,LogoutBtn,RTE,Signup,Login};
+import PostCard from "./PostCard"
+
+export {Header,Footer,Container,Logo,LogoutBtn,RTE,Signup,Login,PostForm,PostCard};
