@@ -18,6 +18,7 @@ import AllPosts from "./pages/AllPosts.jsx"
 
 
 
+
 const router = createBrowserRouter([
   {
     path : "/",
