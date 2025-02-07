@@ -21,9 +21,10 @@ function Signup() {
       
       if(userData){
         const userData = await authService.getCurrentUser()
-
+         
         if (userData){
             dispatch(login(userData))
+            
             navigate("/");
         }
       }
@@ -32,7 +33,8 @@ function Signup() {
         setError(error.message);
     }
   }
-
+    
+ 
     return (
     <div className="flex items-center justify-center">
         <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
