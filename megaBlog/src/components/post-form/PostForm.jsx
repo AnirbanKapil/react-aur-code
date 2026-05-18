@@ -13,7 +13,7 @@ function PostForm({post}) {
         title : post?.title || "",
         slug : post?.slug || "",
         content : post?.content || "",
-        status : post?.status || "active",
+        status : post?.status ? "true" : "false",
     }
   }); 
 
@@ -31,6 +31,7 @@ function PostForm({post}) {
       
       const dbPost = await appWriteService.updatePost(post.$id,{
         ...data,
+        status: data.status === "true",
         featuredImage : file ? file.$id : undefined,
       });
       if(dbPost){
@@ -43,7 +44,7 @@ function PostForm({post}) {
         const fileId = file.$id;
         data.featuredImage = fileId;
       
-        const dbPost = await appWriteService.createPost({...data,userId : userData.$id});
+        const dbPost = await appWriteService.createPost({...data,status: data.status === "true", userId : userData.$id});
         if(dbPost){
           navigate(`/post/${dbPost.$id}`)
         }
@@ -118,7 +119,7 @@ return (
             </div>
         )}
         <Select
-            options={["active", "inactive"]}
+            options={["true", "false"]}
             label="Status"
             className="mb-4"
             {...register("status", { required: true })}
