@@ -42,28 +42,33 @@ function Header() {
   ]
 
   return (
-    <header className='py-3 shadow bg-'>
+    <header className='relative overflow-hidden bg-slate-950 text-white shadow-lg'>
+      <div className='absolute inset-0'>
+      <div className='absolute top-0 left-1/4 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl'></div>
+      <div className='absolute bottom-0 right-1/4 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl'></div>
+      </div>
+       <div className='absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]'></div>
       <Container>
-         <nav className='flex'>
+         <nav className='relative z-10 flex items-center py-3'>
           <div className='mr-4'>
-          <Link to="/">
-            <Logo width='70px' />
+             <Link to="/">
+              <Logo width='70px' />
+             </Link>
+          </div>  
           
-          </Link>
-          </div>
-          <ul className='flex ml-auto'>
+          <ul className='ml-auto flex items-center gap-2'>
               {navItems.map((item) => 
               item.active ? (
                 <li key={item.name}>
                  <button onClick={()=>{navigate(item.slug)}} 
-                 className='inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'>
+                 className='rounded-full px-6 py-2 font-medium text-slate-200 transition duration-300 hover:bg-white/10 hover:text-cyan-400'>
                   {item.name}
                  </button>
                 </li>
               ) : null
               )}
               {authStatus && (
-                <li>
+                <li className='ml-2'>
                   <LogoutBtn />
                 </li>
               )}
