@@ -32,7 +32,6 @@ export class Service {
                 userId
               }
             ) 
-           
             return data;
           } catch (error) {
               console.log("Appwrite service createPost error -", error.message);
@@ -119,8 +118,8 @@ export class Service {
           return false
         }
       }
-      getFilePreview(fileId){
-        return this.bucket.getFilePreview(
+      getFileView(fileId){
+        return this.bucket.getFileView(
           conf.appwriteBucketId,
           fileId
         )
