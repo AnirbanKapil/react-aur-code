@@ -37,6 +37,7 @@ export class Service {
               console.log("Appwrite service createPost error -", error.message);
           }
        }
+      
        async updatePost (slug,{title,content,featuredImage,status}) {
             try {
               return await this.databases.updateDocument(
@@ -55,6 +56,7 @@ export class Service {
               console.log("Appwrite service updatePost error", error)
             } 
        }
+      
        async deletePost (slug){
            try {
                 await this.databases.deleteDocument(
@@ -68,6 +70,7 @@ export class Service {
                return false
            }
        }
+      
        async getPost(slug){
         try {
           return await this.databases.getDocument(
@@ -80,6 +83,7 @@ export class Service {
           return false
         }
        }
+      
        async getPosts(queries = [Query.equal("status","active")]){
         try {
           return await this.databases.listDocuments(
@@ -92,6 +96,26 @@ export class Service {
         }
        }
 
+       async getCurrentUser () {
+        try {
+          return await this.account.get();
+        } catch (error) {
+           console.log("Appwrite service getCurrentUser error -", error);
+           return null;
+        }
+       }
+
+       async getPostsOfCurrentUser (userId) {
+         try {
+          return await this.databases.listDocuments(
+            conf.appwriteDatabaseId,
+            conf.appwriteCollectionId,
+            [Query.equal("userId",userId)]
+          )
+        } catch (error) {
+          console.log("Appwrite service getPostsOfCurrentUser error -", error )
+        }
+       } 
       //  file upload service
 
       async uploadFile(file){
